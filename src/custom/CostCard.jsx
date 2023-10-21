@@ -1,32 +1,38 @@
 import React from "react";
-
-export default function CostCard() {
+import axios from "axios";
+export default function CostCard({ bill }) {
+  const [dataCard, setDataCard] = React.useState([]);
+  console.log(dataCard);
+  React.useEffect(() => {
+    axios
+      .get("http://127.0.0.1:3012/cost_data?id=" + parseInt(bill))
+      .then((res) => setDataCard(res.data[0]));
+  }, [bill]);
   return (
     <>
-      <div class="card" style={{ width: "80%", width: "300px" }}>
+      <div class="card" style={{ width: "350px" }}>
         <img
           class="card-img-top"
-          src={"http://127.0.0.1:3012/img?id=" + parseInt(27)}
+          src={"http://127.0.0.1:3012/bills?id=" + parseInt(bill)}
           alt="Card image cap"
         ></img>
       </div>
       <div
         class="card"
         style={{
-          marginLeft: "20px",
+          marginTop: "20px",
           display: "flex",
           justifyContent: "center",
           textAlign: "center",
-          width: "400px",
+          width: "350px",
         }}
       >
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <h3>المعلومات الاساسية </h3>
+            <h3>الوصف و السعر </h3>
           </li>
-          <li class="list-group-item">{"kkk"}</li>
-          <li class="list-group-item">{"ddd"}</li>
-          <li class="list-group-item">{"ff"}</li>
+          <li class="list-group-item">{dataCard?.description}</li>
+          <li class="list-group-item">{dataCard?.cost}</li>
 
           <li class="list-group-item"></li>
         </ul>

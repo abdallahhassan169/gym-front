@@ -6,7 +6,8 @@ import { Button } from "@mui/material";
 import CostForm from "./CostForm";
 import CostCard from "./CostCard";
 import dayjs from "dayjs";
-
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -14,7 +15,11 @@ const columns = [
     headerName: "الوصف",
     width: 300,
   },
-
+  {
+    field: "cost",
+    headerName: "التكلفة",
+    width: 150,
+  },
   {
     field: "date",
     headerName: "التاريخ",
@@ -29,8 +34,8 @@ export default function Costs() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 500,
-    height: 650,
+    width: 400,
+    height: 500,
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
@@ -39,15 +44,20 @@ export default function Costs() {
   const gridref = React.useRef();
   const [modal, setModal] = React.useState(false);
   const [query, setQuery] = React.useState("");
-
-  const onRowClick = () => {
+  const [billId, setBillId] = React.useState();
+  const [noti, setNoti] = React.useState(false);
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  const onRowClick = (row) => {
     setModal("info");
-    console.log("lllll");
+    setBillId(row?.row.id);
   };
   const onAddClose = (refresh) => {
     if (refresh) {
       setModal(false);
       gridref.current.refreshData();
+      setNoti("تمت الاضافة بنجاح");
     } else setModal(false);
   };
   const url = `http://127.0.0.1:3012/subs_costs?type=${parseInt(
@@ -74,15 +84,40 @@ export default function Costs() {
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
-      <Grid columns={columns} url={url} ref={gridref} rowClick={onRowClick} />
+      <Grid
+        columns={columns}
+        url={url}
+        ref={gridref}
+        rowClick={onRowClick}
+        fetchParams={[query]}
+      />
       <Modal
         open={modal}
         onClose={() => onAddClose(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>{modal === "info" ? <CostCard /> : <CostForm />}</Box>
+        <Box sx={style}>
+          {modal === "info" ? (
+            <CostCard bill={billId} />
+          ) : (
+            <CostForm onClose={onAddClose} />
+          )}
+        </Box>
       </Modal>
+      <Snackbar
+        open={noti}
+        autoHideDuration={6000}
+        onClose={() => setNoti(false)}
+      >
+        <Alert
+          onClose={() => setNoti(false)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {noti}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

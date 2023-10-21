@@ -4,7 +4,8 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import NewReg from "./NewReg";
 import { Button } from "@mui/material";
-
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 export default function UserCard({ user_id }) {
   const style = {
     position: "absolute",
@@ -20,12 +21,25 @@ export default function UserCard({ user_id }) {
   };
   const [data, setData] = React.useState([]);
   const [modalShow, setModalShow] = React.useState(false);
-
-  React.useEffect(() => {
+  const [noti, setNoti] = React.useState("");
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  const onClose = (refresh) => {
+    if (refresh) {
+      setModalShow(false);
+      fetch();
+      setNoti("تم الاشتراك بنجاح");
+    } else setModalShow(false);
+  };
+  const fetch = () => {
     axios
       .get("http://127.0.0.1:3012/user_by_id?user_id=" + parseInt(user_id))
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
+  };
+  React.useEffect(() => {
+    fetch();
   }, [user_id]);
   return (
     <>
@@ -80,9 +94,22 @@ export default function UserCard({ user_id }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <NewReg user_id={user_id} />
+          <NewReg user_id={user_id} onClose={onClose} />
         </Box>
       </Modal>
+      <Snackbar
+        open={noti}
+        autoHideDuration={6000}
+        onClose={() => setNoti(false)}
+      >
+        <Alert
+          onClose={() => setNoti(false)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {noti}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

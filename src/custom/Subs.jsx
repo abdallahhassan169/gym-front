@@ -1,10 +1,5 @@
 import React from "react";
 import Grid from "./Grid";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import { Button } from "@mui/material";
-import CostForm from "./CostForm";
-import CostCard from "./CostCard";
 import dayjs from "dayjs";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -15,7 +10,7 @@ const columns = [
   },
   {
     field: "cost",
-    headerName: "التكلفة",
+    headerName: "سعر الاشتراك",
     width: 250,
   },
   {
@@ -40,19 +35,8 @@ export default function Subs() {
     p: 4,
   };
   const gridref = React.useRef();
-  const [modal, setModal] = React.useState(false);
   const [query, setQuery] = React.useState("");
 
-  const onRowClick = () => {
-    setModal("info");
-    console.log("lllll");
-  };
-  const onAddClose = (refresh) => {
-    if (refresh) {
-      setModal(false);
-      gridref.current.refreshData();
-    } else setModal(false);
-  };
   const url = `http://127.0.0.1:3012/subs_costs?type=${parseInt(
     2
   )}&query=${query}`;
@@ -68,21 +52,7 @@ export default function Subs() {
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
-      <Grid
-        columns={columns}
-        url={url}
-        ref={gridref}
-        rowClick={onRowClick}
-        fetchParams={[query]}
-      />
-      <Modal
-        open={modal}
-        onClose={() => onAddClose(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>{modal === "info" ? <CostCard /> : <CostForm />}</Box>
-      </Modal>
+      <Grid columns={columns} url={url} ref={gridref} fetchParams={[query]} />
     </>
   );
 }

@@ -111,10 +111,14 @@ export default function Main() {
                 onChange={handleChange}
                 aria-label="lab API tabs example"
               >
-                <Tab label="الاشتراكات" value="1" />
-                <Tab label="المصاريف " value="2" />
-                <Tab label=" دخل الاشتراكات " value="3" />
-                <Tab label=" التقارير " value="4" />
+                <Tab label="الاشتراكات" value="1" sx={{ color: "white" }} />
+                <Tab label="المصاريف " value="2" sx={{ color: "white" }} />
+                <Tab
+                  label=" دخل الاشتراكات "
+                  value="3"
+                  sx={{ color: "white" }}
+                />
+                <Tab label=" التقارير " value="4" sx={{ color: "white" }} />
               </TabList>
             </Box>
             <TabPanel value="1">
