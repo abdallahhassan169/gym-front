@@ -1,9 +1,7 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
-import UserCard from "./UserCard";
 import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
 
 const Grid = React.forwardRef(
   ({ columns, url, fetchParams, rowClick }, ref, props) => {

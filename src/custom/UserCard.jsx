@@ -4,8 +4,10 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import NewReg from "./NewReg";
 import { Button } from "@mui/material";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Stack from "@mui/material/Stack";
+import Alert from "@mui/material/Alert";
+import ReactWhatsapp from "react-whatsapp";
 export default function UserCard({ user_id }) {
   const style = {
     position: "absolute",
@@ -22,94 +24,112 @@ export default function UserCard({ user_id }) {
   const [data, setData] = React.useState([]);
   const [modalShow, setModalShow] = React.useState(false);
   const [noti, setNoti] = React.useState("");
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
-  const onClose = (refresh) => {
-    if (refresh) {
-      setModalShow(false);
-      fetch();
-      setNoti("تم الاشتراك بنجاح");
-    } else setModalShow(false);
+  const my = React.useRef();
+  console.log(my.current);
+
+  const onClose = () => {
+    setModalShow(false);
+    fetch();
+    setNoti("تم الاشتراك بنجاح");
   };
+  const url =
+    "http://127.0.0.1:3012/user_by_id?user_id=" + parseInt(user_id?.id);
   const fetch = () => {
     axios
-      .get("http://127.0.0.1:3012/user_by_id?user_id=" + parseInt(user_id))
+      .get(url)
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   };
+
   React.useEffect(() => {
     fetch();
-  }, [user_id]);
+  }, [user_id?.id]);
   return (
     <>
-      <div style={{ display: "inline-flex", marginTop: "30px" }}>
-        <div class="card" style={{ width: "80%", width: "300px" }}>
-          <img
-            class="card-img-top"
-            src={"http://127.0.0.1:3012/img?id=" + parseInt(user_id)}
-            alt="Card image cap"
-          ></img>
+      {user_id?.id && (
+        <div style={{ display: "inline-flex", marginTop: "30px" }}>
+          <div class="card" style={{ width: "80%", width: "300px" }}>
+            <img
+              class="card-img-top"
+              src={"http://127.0.0.1:3012/img?id=" + parseInt(user_id?.id)}
+              alt="Card image cap"
+            ></img>
+          </div>
+          <div
+            class="card"
+            style={{
+              marginLeft: "20px",
+              display: "flex",
+              justifyContent: "center",
+              textAlign: "center",
+              width: "400px",
+            }}
+          >
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h3>المعلومات الاساسية </h3>
+              </li>
+              <li class="list-group-item">{data[0]?.name}</li>
+              <li class="list-group-item">{data[0]?.phone}</li>
+              <li class="list-group-item">{data[0]?.email}</li>
+              <li class="list-group-item">{data[0]?.birth_day.slice(0, 10)}</li>
+              <li class="list-group-item">{" حصص " + data[0]?.classes_num}</li>
+
+              <li class="list-group-item"></li>
+            </ul>
+          </div>
         </div>
+      )}
+
+      <Stack sx={{ width: "100%" }} spacing={2}>
+        {user_id?.exist === false && (
+          <Alert severity="error">
+            <AlertTitle>تنبيه</AlertTitle>
+            لقد تم انتهاء الاشتراك
+          </Alert>
+        )}
+        {!user_id?.id && (
+          <Alert severity="info">
+            <AlertTitle>رسالة</AlertTitle>
+            هذا المستخدم غير موجود
+          </Alert>
+        )}
+        {user_id?.exist === true && (
+          <Alert severity="success">
+            <AlertTitle>عملية ناجحة</AlertTitle>
+            تم التسجيل بنجاح
+          </Alert>
+        )}
+      </Stack>
+
+      {user_id?.id && (
         <div
-          class="card"
           style={{
-            marginLeft: "20px",
-            display: "flex",
             justifyContent: "center",
-            textAlign: "center",
-            width: "400px",
+            display: "flex",
+            marginTop: "20px",
           }}
         >
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <h3>المعلومات الاساسية </h3>
-            </li>
-            <li class="list-group-item">{data[0]?.name}</li>
-            <li class="list-group-item">{data[0]?.phone}</li>
-            <li class="list-group-item">{data[0]?.email}</li>
-            <li class="list-group-item">{data[0]?.birth_day.slice(0, 10)}</li>
-            <li class="list-group-item">{" حصص " + data[0]?.classes_num}</li>
-
-            <li class="list-group-item"></li>
-          </ul>
+          <Button
+            color="success"
+            onClick={() => setModalShow(true)}
+            variant="contained"
+            sx={{ width: "700px", height: "50px", color: "black" }}
+          >
+            تحديث معلومات الاشتراك
+          </Button>
         </div>
-      </div>
-      <div
-        style={{ justifyContent: "center", display: "flex", marginTop: "20px" }}
-      >
-        <Button
-          color="success"
-          onClick={() => setModalShow(true)}
-          variant="contained"
-          sx={{ width: "700px", height: "50px", color: "black" }}
-        >
-          تحديث معلومات الاشتراك
-        </Button>
-      </div>
+      )}
       <Modal
         open={modalShow}
-        onClose={() => setModalShow(false)}
+        onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <NewReg user_id={user_id} onClose={onClose} />
+          <NewReg user_id={user_id?.id} onClose={onClose} />
         </Box>
       </Modal>
-      <Snackbar
-        open={noti}
-        autoHideDuration={6000}
-        onClose={() => setNoti(false)}
-      >
-        <Alert
-          onClose={() => setNoti(false)}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          {noti}
-        </Alert>
-      </Snackbar>
     </>
   );
 }

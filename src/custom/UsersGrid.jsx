@@ -58,7 +58,6 @@ const UsersGrid = React.forwardRef(({ query, sport }, ref) => {
   const gridref = React.useRef();
   const refreshGrid = () => {
     gridref.current.refreshData();
-    console.log(",,,,,");
   };
   console.log(gridref);
   React.useImperativeHandle(ref, () => ({
@@ -70,7 +69,7 @@ const UsersGrid = React.forwardRef(({ query, sport }, ref) => {
     setModalShow(true);
     setUser(props.row.id);
   };
-  const url = `http://127.0.0.1:3012/users?type=1&query=${query}&sport=${
+  const url = `http://127.0.0.1:3012/users?query=${query}&sport=${
     parseInt(sport) ? parseInt(sport) : 1
   }`;
 
@@ -90,7 +89,7 @@ const UsersGrid = React.forwardRef(({ query, sport }, ref) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <UserCard user_id={user} />
+          <UserCard user_id={{ id: user }} />
         </Box>
       </Modal>
     </>

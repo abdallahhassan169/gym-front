@@ -2,10 +2,11 @@
   "name": "gym-front",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.11.1",
-    "@mui/lab": "latest",
     "@emotion/styled": "^11.11.0",
+    "@mui/lab": "latest",
     "@mui/material": "^5.14.12",
     "@mui/x-data-grid": "^6.16.0",
     "@mui/x-date-pickers": "^6.16.1",
@@ -21,13 +22,16 @@
     "react-dom": "^18.2.0",
     "react-qr-scanner": "^1.0.0-alpha.11",
     "react-router-dom": "^6.16.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
+    "react-whatsapp": "^0.3.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
+    "start:production": "npm run build && npm run start:prod",
+    "start:prod": "NODE_ENV=production node server",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

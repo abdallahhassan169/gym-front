@@ -16,7 +16,10 @@ const Test = () => {
       setHandler(true);
       axios
         .post("http://127.0.0.1:3012/scan", { code: data.text })
-        .then((res) => setUser(res.data));
+        .then((res) => {
+          setUser(res.data ?? { id: null });
+          console.log(res.data, "datattatata");
+        });
     }
   };
 
