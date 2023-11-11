@@ -29,7 +29,19 @@ const Grid = React.forwardRef(
     return (
       <>
         <div>
-          <Box sx={{ height: 550, width: "100%", marginTop: "15px" }}>
+          <Box
+            sx={{
+              height: 550,
+              width: "100%",
+              marginTop: "15px",
+              border: 2,
+              borderColor: "primary.light",
+
+              "& .MuiDataGrid-row:hover": {
+                backgroundColor: "grey",
+              },
+            }}
+          >
             <DataGrid
               onRowClick={rowClick}
               rows={data}

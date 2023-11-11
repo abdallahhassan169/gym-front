@@ -26,6 +26,7 @@ import AllProducts from "./Products/AllProducts";
 import ProductsPrices from "./Products/ProductPrices";
 import ProductsForConsumption from "./Products/ProductsForConsumption";
 import Index from "./Products/Index";
+import Logs from "./Logs";
 export default function Main() {
   const style = {
     position: "absolute",
@@ -92,12 +93,19 @@ export default function Main() {
             margin: "10px 80px 0px 80px",
           }}
         >
-          <TabContext value={value} sx={{ textColor: "red" }}>
+          <TabContext
+            value={value}
+            sx={{
+              textColor: "red",
+              borderRadius: "10px",
+              alignItems: "center",
+            }}
+          >
             <Box
               sx={{
                 borderBottom: "0px",
                 direction: "rtl",
-
+                borderRadius: "10px",
                 textColor: "red",
                 width: "100%",
               }}
@@ -106,11 +114,13 @@ export default function Main() {
                 sx={{
                   backgroundColor: "#333",
                   height: "60px",
-
+                  borderRadius: "15px",
                   paddingBottom: "0px",
                   color: "white",
                   textColor: "white",
+                  alignItems: "center",
                 }}
+                centered
                 onChange={handleChange}
                 aria-label="lab API tabs example"
               >
@@ -124,6 +134,7 @@ export default function Main() {
                 <Tab label=" التقارير " value="4" sx={{ color: "white" }} />
                 <Tab label=" البوفيه " value="5" sx={{ color: "white" }} />
                 <Tab label=" الاجهزة " value="6" sx={{ color: "white" }} />
+                <Tab label=" الحضور " value="7" sx={{ color: "white" }} />
               </TabList>
             </Box>
             <TabPanel value="1">
@@ -153,6 +164,9 @@ export default function Main() {
             </TabPanel>
             <TabPanel value="6">
               <Costs type={3} />
+            </TabPanel>
+            <TabPanel value="7">
+              <Logs />
             </TabPanel>
           </TabContext>
         </div>

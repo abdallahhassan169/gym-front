@@ -9,6 +9,7 @@ const columns = [
     field: "name",
     headerName: "الاسم",
     width: 150,
+    headerClassName: "super-app-theme--header",
   },
   {
     field: "type_name",
