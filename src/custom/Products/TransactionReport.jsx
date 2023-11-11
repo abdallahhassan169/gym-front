@@ -13,12 +13,7 @@ const columns = [
   {
     field: "cost_sum",
     headerName: "المصروفات",
-    width: 100,
-  },
-  {
-    field: "dev_cost",
-    headerName: "الاجهزة",
-    width: 100,
+    width: 150,
   },
   {
     field: "sub_sum",
@@ -29,7 +24,7 @@ const columns = [
   {
     field: "date",
     headerName: "التاريخ",
-    width: 200,
+    width: 250,
     valueFormatter: (params) =>
       dayjs(params.value).format("DD/MM/YYYY hh:mm A"),
   },
@@ -39,7 +34,7 @@ const columns = [
     width: 150,
   },
 ];
-export default function Reports() {
+export default function TransactionReports() {
   const gridref = React.useRef();
   const password = "1234";
   const [type, setType] = React.useState("day");

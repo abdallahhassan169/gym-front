@@ -22,6 +22,10 @@ import UsersGrid from "./UsersGrid";
 import Costs from "./Costs";
 import Subs from "./Subs";
 import Reports from "./Reports";
+import AllProducts from "./Products/AllProducts";
+import ProductsPrices from "./Products/ProductPrices";
+import ProductsForConsumption from "./Products/ProductsForConsumption";
+import Index from "./Products/Index";
 export default function Main() {
   const style = {
     position: "absolute",
@@ -118,6 +122,8 @@ export default function Main() {
                   sx={{ color: "white" }}
                 />
                 <Tab label=" التقارير " value="4" sx={{ color: "white" }} />
+                <Tab label=" البوفيه " value="5" sx={{ color: "white" }} />
+                <Tab label=" الاجهزة " value="6" sx={{ color: "white" }} />
               </TabList>
             </Box>
             <TabPanel value="1">
@@ -134,13 +140,19 @@ export default function Main() {
               <UsersGrid sport={sport} query={query} ref={gridref} />
             </TabPanel>
             <TabPanel value="2">
-              <Costs />{" "}
+              <Costs type={1} />
             </TabPanel>
             <TabPanel value="3">
               <Subs />
             </TabPanel>
             <TabPanel value="4">
               <Reports />
+            </TabPanel>
+            <TabPanel value="5">
+              <Index />
+            </TabPanel>
+            <TabPanel value="6">
+              <Costs type={3} />
             </TabPanel>
           </TabContext>
         </div>

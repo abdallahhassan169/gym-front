@@ -1,34 +1,28 @@
 import React from "react";
-import Grid from "./Grid";
+import Grid from "../Grid";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Button } from "@mui/material";
-import CostForm from "./CostForm";
-import CostCard from "./CostCard";
 import dayjs from "dayjs";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import NewProduct from "./NewProduct";
+import NewProductPrice from "./NewProductPrice";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
-    field: "description",
-    headerName: "الوصف",
+    field: "name",
+    headerName: "الاسم",
     width: 300,
   },
   {
-    field: "cost",
-    headerName: "التكلفة",
-    width: 150,
-  },
-  {
-    field: "date",
-    headerName: "التاريخ",
+    field: "serial",
+    headerName: "السريال",
     width: 300,
-    valueFormatter: (params) =>
-      dayjs(params.value).format("DD/MM/YYYY hh:mm A"),
+    valueFormatter: (params) => params.value || "NAN",
   },
 ];
-export default function Costs({ type }) {
+export default function AllProducts() {
   const style = {
     position: "absolute",
     top: "50%",
@@ -44,14 +38,14 @@ export default function Costs({ type }) {
   const gridref = React.useRef();
   const [modal, setModal] = React.useState(false);
   const [query, setQuery] = React.useState("");
-  const [billId, setBillId] = React.useState();
+  const [productId, setProductId] = React.useState();
   const [noti, setNoti] = React.useState(false);
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
   const onRowClick = (row) => {
-    setModal("info");
-    setBillId(row?.row.id);
+    setModal("addPrice");
+    setProductId(row?.row.id);
   };
   const onAddClose = (refresh) => {
     if (refresh) {
@@ -60,9 +54,7 @@ export default function Costs({ type }) {
       setNoti("تمت الاضافة بنجاح");
     } else setModal(false);
   };
-  const url = `http://127.0.0.1:3012/subs_costs?type=${parseInt(
-    type
-  )}&query=${query}
+  const url = `http://127.0.0.1:3012/products?query=${query}
   `;
   return (
     <>
@@ -70,9 +62,9 @@ export default function Costs({ type }) {
         variant="contained"
         style={{ width: "100%", height: "40px", marginBottom: "10px" }}
         color="success"
-        onClick={() => setModal("AddCost")}
+        onClick={() => setModal("AddProduct")}
       >
-        اضافة مصروفات
+        اضافة منتج جديد
       </Button>
       <div style={{ width: "93%" }}>
         <input
@@ -98,10 +90,10 @@ export default function Costs({ type }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {modal === "info" ? (
-            <CostCard bill={billId} />
+          {modal === "AddProduct" ? (
+            <NewProduct onClose={onAddClose} />
           ) : (
-            <CostForm type={type} onClose={onAddClose} />
+            <NewProductPrice productId={productId} onClose={onAddClose} />
           )}
         </Box>
       </Modal>

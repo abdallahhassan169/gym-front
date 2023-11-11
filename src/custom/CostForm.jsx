@@ -8,7 +8,7 @@ import { useState } from "react";
 import axios from "axios";
 import OutlinedInput from "@mui/material/OutlinedInput";
 
-export default function CostForm({ onClose }) {
+export default function CostForm({ onClose, type }) {
   const [description, setDescription] = useState("");
   const [cost, setCost] = useState(0);
   const [file, setFile] = useState();
@@ -21,6 +21,7 @@ export default function CostForm({ onClose }) {
     const payload = {
       cost: cost,
       description: description,
+      type: type,
     };
     const formData = new FormData();
     formData.append("image", file);
