@@ -59,12 +59,11 @@ export default function Main() {
   const onUserFormClose = (refresh) => {
     if (refresh) {
       setUserModal(false);
-      gridref.current.refreshGrid();
+      gridref?.current?.refreshGrid();
       setNoti("تمت الاضافة بنجاح");
       console.log(" doneeee");
     } else {
       setUserModal(false);
-      gridref.current.refreshGrid();
     }
   };
   const getData = () => {
