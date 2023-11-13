@@ -9,7 +9,7 @@ import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 
-export default function Consumption({ onClose, productPriceId }) {
+export default function Consumption({ onClose, productPrice }) {
   const [qty, setQty] = useState(0);
 
   const [noti, setNoti] = useState(false);
@@ -21,7 +21,8 @@ export default function Consumption({ onClose, productPriceId }) {
     e.preventDefault();
     const payload = {
       qty: qty,
-      product_price_id: productPriceId,
+      product_price_id: productPrice?.id,
+      unit_price: productPrice?.unit_price,
     };
     axios
       .post("http://127.0.0.1:3012/add_product_transaction", payload)

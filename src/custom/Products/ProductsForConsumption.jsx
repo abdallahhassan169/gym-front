@@ -45,7 +45,7 @@ export default function ProductsForConsumption() {
   });
   const onRowClick = (row) => {
     setModal("addPrice");
-    setProductId(row?.row.id);
+    setProductId(row?.row);
   };
   const onAddClose = (refresh) => {
     if (refresh) {
@@ -82,7 +82,7 @@ export default function ProductsForConsumption() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Consumption productPriceId={productId} onClose={onAddClose} />
+          <Consumption productPrice={productId} onClose={onAddClose} />
         </Box>
       </Modal>
       <Snackbar

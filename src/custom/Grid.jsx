@@ -6,7 +6,6 @@ import Box from "@mui/material/Box";
 const Grid = React.forwardRef(
   ({ columns, url, fetchParams, rowClick }, ref, props) => {
     const [data, setData] = React.useState([]);
-    const [user, setUser] = React.useState(null);
     console.log(fetchParams, "fetchParams");
     const fetchUsers = () => {
       axios.get(url).then((res) => {
@@ -36,7 +35,7 @@ const Grid = React.forwardRef(
               marginTop: "15px",
               border: 2,
               borderColor: "primary.light",
-
+              marginBottom: "90px",
               "& .MuiDataGrid-row:hover": {
                 backgroundColor: "grey",
               },

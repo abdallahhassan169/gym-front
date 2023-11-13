@@ -36,7 +36,7 @@ const columns = [
   {
     field: "date",
     headerName: "التاريخ",
-    width: 150,
+    width: 200,
     valueFormatter: (params) =>
       dayjs(params.value).format("DD/MM/YYYY hh:mm A"),
   },

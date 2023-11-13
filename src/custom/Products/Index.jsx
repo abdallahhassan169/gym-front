@@ -7,7 +7,9 @@ import AllProducts from "./AllProducts";
 import ProductsPrices from "./ProductPrices";
 import ProductsForConsumption from "./ProductsForConsumption";
 import { Box } from "@mui/material";
-export default function Index() {
+import ProductReports from "./ProductReports";
+import Transactions from "./Transactions";
+export default function Index({ isAdmin }) {
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
@@ -35,8 +37,10 @@ export default function Index() {
           aria-label="lab API tabs example"
         >
           <Tab label=" الاستهلاك " value="1" />
-          <Tab label=" المنتجات " value="2" />
-          <Tab label=" الشحنات " value="3" />
+          <Tab label=" المنتجات " value="2" disabled={!isAdmin} />
+          <Tab label=" الشحنات " value="3" disabled={!isAdmin} />
+          <Tab label=" تقارير البوفيه " value="4" disabled={!isAdmin} />
+          <Tab label=" عمليات الشراء  " value="5" disabled={!isAdmin} />
         </TabList>
       </Box>
 
@@ -48,6 +52,12 @@ export default function Index() {
       </TabPanel>
       <TabPanel value="3">
         <ProductsPrices />
+      </TabPanel>
+      <TabPanel value="4">
+        <ProductReports />
+      </TabPanel>
+      <TabPanel value="5">
+        <Transactions />
       </TabPanel>
     </TabContext>
   );

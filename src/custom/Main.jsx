@@ -22,11 +22,9 @@ import UsersGrid from "./UsersGrid";
 import Costs from "./Costs";
 import Subs from "./Subs";
 import Reports from "./Reports";
-import AllProducts from "./Products/AllProducts";
-import ProductsPrices from "./Products/ProductPrices";
-import ProductsForConsumption from "./Products/ProductsForConsumption";
 import Index from "./Products/Index";
 import Logs from "./Logs";
+import AdminForm from "./AdminForm";
 export default function Main() {
   const style = {
     position: "absolute",
@@ -41,7 +39,11 @@ export default function Main() {
     p: 4,
   };
   const [value, setValue] = React.useState("1");
-
+  const [isAdmin, setIsAdmin] = React.useState(false);
+  const handleAdmin = () => {
+    setIsAdmin(true);
+    setUserModal(false);
+  };
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -54,7 +56,6 @@ export default function Main() {
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-  console.log(gridref, "gridref");
   const onUserFormClose = (refresh) => {
     if (refresh) {
       setUserModal(false);
@@ -125,16 +126,38 @@ export default function Main() {
                 aria-label="lab API tabs example"
               >
                 <Tab label="الاشتراكات" value="1" sx={{ color: "white" }} />
-                <Tab label="المصاريف " value="2" sx={{ color: "white" }} />
+
+                <Tab
+                  label="المصاريف "
+                  value="2"
+                  sx={{ color: "white" }}
+                  disabled={!isAdmin}
+                />
                 <Tab
                   label=" دخل الاشتراكات "
                   value="3"
                   sx={{ color: "white" }}
+                  disabled={!isAdmin}
                 />
-                <Tab label=" التقارير " value="4" sx={{ color: "white" }} />
+                <Tab
+                  label=" التقارير "
+                  value="4"
+                  sx={{ color: "white" }}
+                  disabled={!isAdmin}
+                />
                 <Tab label=" البوفيه " value="5" sx={{ color: "white" }} />
-                <Tab label=" الاجهزة " value="6" sx={{ color: "white" }} />
-                <Tab label=" الحضور " value="7" sx={{ color: "white" }} />
+                <Tab
+                  label=" الاجهزة "
+                  value="6"
+                  sx={{ color: "white" }}
+                  disabled={!isAdmin}
+                />
+                <Tab
+                  label=" الحضور "
+                  value="7"
+                  sx={{ color: "white" }}
+                  disabled={!isAdmin}
+                />
               </TabList>
             </Box>
             <TabPanel value="1">
@@ -150,17 +173,19 @@ export default function Main() {
               </div>
               <UsersGrid sport={sport} query={query} ref={gridref} />
             </TabPanel>
+
             <TabPanel value="2">
               <Costs type={1} />
             </TabPanel>
             <TabPanel value="3">
               <Subs />
             </TabPanel>
+
             <TabPanel value="4">
               <Reports />
             </TabPanel>
             <TabPanel value="5">
-              <Index />
+              <Index isAdmin={isAdmin} />
             </TabPanel>
             <TabPanel value="6">
               <Costs type={3} />
@@ -204,6 +229,11 @@ export default function Main() {
                 </CDBSidebarMenuItem>
               </CDBSidebarMenu>
             </div>
+            <div style={{ backgroundColor: "grey", marginTop: "5px" }}>
+              <CDBSidebarMenu onClick={() => setUserModal("admin")}>
+                <CDBSidebarMenuItem icon="key">Admin</CDBSidebarMenuItem>
+              </CDBSidebarMenu>
+            </div>
           </CDBSidebarContent>
 
           <CDBSidebarFooter style={{ textAlign: "center" }}>
@@ -225,7 +255,11 @@ export default function Main() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <NewUser onClose={onUserFormClose} />
+          {userModal === "admin" ? (
+            <AdminForm onSuccess={handleAdmin} />
+          ) : (
+            <NewUser onClose={onUserFormClose} />
+          )}
         </Box>
       </Modal>
       <Snackbar

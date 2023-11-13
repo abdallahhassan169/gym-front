@@ -25,9 +25,10 @@ export default function Logs() {
   const gridref = React.useRef();
   const d = new Date();
   const [query, setQuery] = React.useState("");
-  const [date, setDate] = React.useState(d.toDateString());
   console.log(d);
-  const url = `http://127.0.0.1:3012/users_log?query=${query}&date=${date}
+  const [from, setFrom] = React.useState("01-01-01 00:00:00");
+  const [to, setTo] = React.useState("01-01-2100 00:00:00");
+  const url = `http://127.0.0.1:3012/users_log?query=${query}&from=${from}&to=${to}
   `;
   return (
     <>
@@ -41,6 +42,18 @@ export default function Logs() {
           onChange={(e) => setQuery(e.target.value)}
         />
         <label
+          htmlFor="from"
+          style={{
+            marginTop: "10px",
+            marginLeft: "10px",
+            marginRight: "20px",
+          }}
+        >
+          من
+        </label>
+        <input onChange={(e) => setFrom(e.target.value)} type="date" />
+
+        <label
           style={{
             marginTop: "10px",
             marginLeft: "10px",
@@ -48,21 +61,15 @@ export default function Logs() {
           }}
           htmlFor="to"
         >
-          التاريخ
+          الي
         </label>
-        <input
-          onChange={(e) => {
-            setDate(e.target.value);
-            console.log(e.target.value);
-          }}
-          type="date"
-        />
+        <input onChange={(e) => setTo(e.target.value)} type="date" />
       </div>
       <Grid
         columns={columns}
         url={url}
         ref={gridref}
-        fetchParams={[query, date]}
+        fetchParams={[query, from, to]}
       />
     </>
   );
