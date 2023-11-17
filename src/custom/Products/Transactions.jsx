@@ -21,9 +21,14 @@ const columns = [
     width: 200,
   },
   {
+    field: "qty",
+    headerName: "الكمية ",
+    width: 100,
+  },
+  {
     field: "date",
     headerName: "التاريخ",
-    width: 300,
+    width: 200,
     valueFormatter: (params) =>
       dayjs(params.value).format("DD/MM/YYYY hh:mm A"),
   },

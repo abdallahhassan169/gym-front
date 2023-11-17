@@ -4,7 +4,7 @@ import UserCard from "./UserCard";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 const columns = [
-  { field: "id", headerName: "ID", width: 90 },
+  { field: "id", headerName: "ID", width: 90, hideable: false },
   {
     field: "name",
     headerName: "الاسم",

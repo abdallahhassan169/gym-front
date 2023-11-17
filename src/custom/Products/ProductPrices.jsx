@@ -13,25 +13,17 @@ const columns = [
     headerName: "اسم المنتج",
     width: 150,
   },
-  {
-    field: "unit_price",
-    headerName: "سعر الوحدة",
-    width: 100,
-  },
+
   {
     field: "total_price",
     headerName: "سعر الشحنة ",
-    width: 100,
+    width: 200,
   },
+
   {
     field: "qty",
-    headerName: "الكمية المتبقية",
-    width: 100,
-  },
-  {
-    field: "total_qty",
     headerName: "كمية الشحنة ",
-    width: 100,
+    width: 150,
   },
   {
     field: "date",
@@ -62,10 +54,7 @@ export default function ProductsPrices() {
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-  const onRowClick = (row) => {
-    setModal("info");
-    setCurrent(row?.row);
-  };
+
   const onAddClose = (refresh) => {
     if (refresh) {
       setModal(false);
@@ -86,13 +75,7 @@ export default function ProductsPrices() {
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
-      <Grid
-        columns={columns}
-        url={url}
-        ref={gridref}
-        rowClick={onRowClick}
-        fetchParams={[query]}
-      />
+      <Grid columns={columns} url={url} ref={gridref} fetchParams={[query]} />
       <Modal
         open={modal}
         onClose={() => onAddClose(false)}

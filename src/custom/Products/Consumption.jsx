@@ -16,13 +16,13 @@ export default function Consumption({ onClose, productPrice }) {
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-
+  console.log(productPrice, "productPrice");
   const handle = (e) => {
     e.preventDefault();
     const payload = {
       qty: qty,
-      product_price_id: productPrice?.id,
-      unit_price: productPrice?.unit_price,
+      product_id: productPrice?.id,
+      unit_price: productPrice?.price,
     };
     axios
       .post("http://127.0.0.1:3012/add_product_transaction", payload)

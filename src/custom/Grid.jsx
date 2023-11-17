@@ -27,37 +27,37 @@ const Grid = React.forwardRef(
 
     return (
       <>
-        <div>
-          <Box
-            sx={{
-              height: 550,
-              width: "100%",
-              marginTop: "15px",
-              border: 2,
-              borderColor: "primary.light",
-              marginBottom: "90px",
-              "& .MuiDataGrid-row:hover": {
-                backgroundColor: "grey",
+        <Box
+          sx={{
+            height: 550,
+            width: "100%",
+            marginTop: "15px",
+            bgcolor: "grey",
+            color: "white",
+            border: 2,
+            borderColor: "primary.light",
+            marginBottom: "90px",
+            "& .MuiDataGrid-row:hover": {
+              backgroundColor: "#556B2F",
+            },
+          }}
+        >
+          <DataGrid
+            onRowClick={rowClick}
+            rows={data}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 10,
+                },
               },
             }}
-          >
-            <DataGrid
-              onRowClick={rowClick}
-              rows={data}
-              columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 10,
-                  },
-                },
-              }}
-              pageSizeOptions={[10]}
-              disableRowSelectionOnClick
-              {...props}
-            />
-          </Box>
-        </div>
+            pageSizeOptions={[10]}
+            disableRowSelectionOnClick
+            {...props}
+          />
+        </Box>
       </>
     );
   }

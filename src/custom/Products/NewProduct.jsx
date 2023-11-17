@@ -9,9 +9,11 @@ import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 
-export default function NewProduct({ onClose }) {
-  const [name, setName] = useState("");
-  const [serial, setSerial] = useState("");
+export default function NewProduct({ onClose, data }) {
+  const [name, setName] = useState();
+  const [serial, setSerial] = useState();
+  const [qty, setQty] = useState();
+  const [price, setPrice] = useState();
 
   const [noti, setNoti] = useState(false);
   const Alert = React.forwardRef(function Alert(props, ref) {
@@ -21,9 +23,13 @@ export default function NewProduct({ onClose }) {
   const handle = (e) => {
     e.preventDefault();
     const payload = {
-      name: name,
-      serial: serial,
+      name: name ?? data.name,
+      serial: serial ?? data.serial,
+      qty: qty ?? data?.availble,
+      price: price ?? data.price,
+      id: data?.id,
     };
+    console.log(payload);
     axios
       .post("http://127.0.0.1:3012/add_product", payload)
       .then((res) => {
@@ -43,6 +49,7 @@ export default function NewProduct({ onClose }) {
           id="my-input"
           aria-describedby="my-helper-text"
           variant="standard"
+          defaultValue={data?.name}
           onChange={(e) => setName(e.target.value)}
         />
       </FormControl>
@@ -53,7 +60,32 @@ export default function NewProduct({ onClose }) {
           id="my-input"
           aria-describedby="my-helper-text"
           variant="standard"
+          defaultValue={data?.serial}
           onChange={(e) => setSerial(e.target.value)}
+        />
+      </FormControl>
+      <FormControl sx={{ marginTop: "20px" }}>
+        <InputLabel htmlFor="my-input">الكمية </InputLabel>
+        <OutlinedInput
+          type="number"
+          required
+          defaultValue={data?.availble}
+          id="my-input"
+          aria-describedby="my-helper-text"
+          variant="standard"
+          onChange={(e) => setQty(e.target.value)}
+        />
+      </FormControl>
+      <FormControl sx={{ marginTop: "20px" }}>
+        <InputLabel htmlFor="my-input">السعر </InputLabel>
+        <OutlinedInput
+          type="number"
+          required
+          id="my-input"
+          aria-describedby="my-helper-text"
+          variant="standard"
+          defaultValue={data?.price}
+          onChange={(e) => setPrice(e.target.value)}
         />
       </FormControl>
       <FormControl sx={{ marginTop: "20px" }}>

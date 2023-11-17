@@ -11,11 +11,20 @@ const columns = [
   { field: "id", headerName: "ID", width: 90 },
 
   {
-    field: "sum",
+    field: "profit",
     headerName: "الارباح",
     width: 150,
   },
-
+  {
+    field: "cost",
+    headerName: "التكاليف",
+    width: 150,
+  },
+  {
+    field: "total",
+    headerName: "المجموع",
+    width: 150,
+  },
   {
     field: "date",
     headerName: "التاريخ",

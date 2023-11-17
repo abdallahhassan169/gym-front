@@ -47,6 +47,7 @@ export default function Main() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   const [data, setData] = React.useState([]);
   const [sport, setSport] = React.useState(0);
   const [query, setQuery] = React.useState("");

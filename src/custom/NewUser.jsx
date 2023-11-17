@@ -15,6 +15,7 @@ import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 
 export default function NewUser({ onClose }) {
+  const [file, setFile] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -49,8 +50,15 @@ export default function NewUser({ onClose }) {
       id_user_type: parseInt(userType),
       id_sport: parseInt(userSport),
     };
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("data", JSON.stringify(payload));
     axios
-      .post("http://127.0.0.1:3012/add_user", payload)
+      .post("http://127.0.0.1:3012/add_user", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         console.log(res);
         onClose(true);
@@ -108,6 +116,16 @@ export default function NewUser({ onClose }) {
           ))}
         </Select>
       </FormControl>
+      <FormControl sx={{ marginTop: "10px" }}>
+        <OutlinedInput
+          type="file"
+          required
+          id="my-input"
+          aria-describedby="my-helper-text"
+          variant="standard"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+      </FormControl>
       <FormControl sx={{ marginTop: "20px" }}>
         <InputLabel id="demo-simple-select-helper-label">
           نوع المستخدم
@@ -135,6 +153,7 @@ export default function NewUser({ onClose }) {
           </DemoContainer>
         </LocalizationProvider>
       </FormControl>
+
       <FormControl sx={{ marginTop: "20px" }}>
         <Button
           type="submit"

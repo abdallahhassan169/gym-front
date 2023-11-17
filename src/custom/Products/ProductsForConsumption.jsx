@@ -2,12 +2,8 @@ import React from "react";
 import Grid from "../Grid";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { Button } from "@mui/material";
-import dayjs from "dayjs";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import NewProduct from "./NewProduct";
-import NewProductPrice from "./NewProductPrice";
 import Consumption from "./Consumption";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -17,9 +13,14 @@ const columns = [
     width: 300,
   },
   {
-    field: "unit_price",
+    field: "price",
     headerName: "السعر",
-    width: 300,
+    width: 200,
+  },
+  {
+    field: "availble",
+    headerName: "الكمية المتاحة",
+    width: 200,
   },
 ];
 export default function ProductsForConsumption() {
@@ -54,7 +55,7 @@ export default function ProductsForConsumption() {
       setNoti("تمت الاضافة بنجاح");
     } else setModal(false);
   };
-  const url = `http://127.0.0.1:3012/product_prices?query=${query}`;
+  const url = `http://127.0.0.1:3012/products?query=${query}`;
 
   return (
     <>

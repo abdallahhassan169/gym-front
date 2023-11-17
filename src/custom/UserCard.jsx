@@ -25,7 +25,7 @@ export default function UserCard({ user_id }) {
   const [modalShow, setModalShow] = React.useState(false);
   const [noti, setNoti] = React.useState("");
   const my = React.useRef();
-  console.log(my.current);
+  console.log(user_id, "user_id");
 
   const onClose = () => {
     setModalShow(false);
@@ -48,7 +48,26 @@ export default function UserCard({ user_id }) {
     <>
       {user_id?.id && (
         <div style={{ display: "inline-flex", marginTop: "30px" }}>
-          <div class="card" style={{ width: "80%", width: "300px" }}>
+          <div
+            class="card"
+            style={{
+              width: "80%",
+              width: "150px",
+              height: "150px",
+              marginRight: "5px",
+              marginLeft: "5px",
+            }}
+          >
+            <img
+              class="card-img-top"
+              src={"http://127.0.0.1:3012/user_img?id=" + parseInt(user_id?.id)}
+              alt="  لا يوجد صورة شخصية"
+            ></img>
+          </div>
+          <div
+            class="card"
+            style={{ width: "80%", width: "150px", height: "150px" }}
+          >
             <img
               class="card-img-top"
               src={"http://127.0.0.1:3012/img?id=" + parseInt(user_id?.id)}
@@ -72,7 +91,9 @@ export default function UserCard({ user_id }) {
               <li class="list-group-item">{data[0]?.name}</li>
               <li class="list-group-item">{data[0]?.phone}</li>
               <li class="list-group-item">{data[0]?.email}</li>
-              <li class="list-group-item">{data[0]?.birth_day.slice(0, 10)}</li>
+              <li class="list-group-item">
+                {data[0]?.reg_end_date?.slice(0, 10) ?? "غير مشترك"}
+              </li>
               <li class="list-group-item">{" حصص " + data[0]?.classes_num}</li>
 
               <li class="list-group-item"></li>

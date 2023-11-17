@@ -11,7 +11,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 export default function NewProductPrice({ onClose, productId, init }) {
   const [qty, setQty] = useState(init?.qty);
   const [price, setPrice] = useState(init?.unit_price);
-  const [total, setTotal] = useState(init?.total_price);
+  const [total, setTotal] = useState(init?.unit_price);
 
   const [noti, setNoti] = useState(false);
   const Alert = React.forwardRef(function Alert(props, ref) {
@@ -28,7 +28,7 @@ export default function NewProductPrice({ onClose, productId, init }) {
       id: init?.id,
     };
     axios
-      .post("http://127.0.0.1:3012/add_product_price", payload)
+      .post("http://127.0.0.1:3012/add_shipment", payload)
       .then((res) => {
         console.log(res);
         onClose(true);
@@ -50,18 +50,7 @@ export default function NewProductPrice({ onClose, productId, init }) {
           onChange={(e) => setQty(e.target.value)}
         />
       </FormControl>
-      <FormControl sx={{ marginTop: "20px" }}>
-        <InputLabel htmlFor="my-input">سعر الوحدة </InputLabel>
-        <OutlinedInput
-          type="number"
-          required
-          id="my-input"
-          aria-describedby="my-helper-text"
-          variant="standard"
-          defaultValue={init?.unit_price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-      </FormControl>
+
       <FormControl sx={{ marginTop: "20px" }}>
         <InputLabel htmlFor="my-input">سعر الشراء الكلي </InputLabel>
         <OutlinedInput

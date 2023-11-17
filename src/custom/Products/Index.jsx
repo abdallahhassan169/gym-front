@@ -9,6 +9,7 @@ import ProductsForConsumption from "./ProductsForConsumption";
 import { Box } from "@mui/material";
 import ProductReports from "./ProductReports";
 import Transactions from "./Transactions";
+import UpdateProduct from "./UpdateProduct";
 export default function Index({ isAdmin }) {
   const [value, setValue] = React.useState("1");
 
@@ -16,12 +17,11 @@ export default function Index({ isAdmin }) {
     setValue(newValue);
   };
   return (
-    <TabContext value={value} sx={{ textColor: "red" }}>
+    <TabContext value={value} sx={{ color: "white" }}>
       <Box
         sx={{
           borderBottom: "0px",
           direction: "rtl",
-
           width: "100%",
         }}
       >
@@ -36,11 +36,37 @@ export default function Index({ isAdmin }) {
           onChange={handleChange}
           aria-label="lab API tabs example"
         >
-          <Tab label=" الاستهلاك " value="1" />
-          <Tab label=" المنتجات " value="2" disabled={!isAdmin} />
-          <Tab label=" الشحنات " value="3" disabled={!isAdmin} />
-          <Tab label=" تقارير البوفيه " value="4" disabled={!isAdmin} />
-          <Tab label=" عمليات الشراء  " value="5" disabled={!isAdmin} />
+          <Tab label=" الاستهلاك " value="1" sx={{ color: "white" }} />
+          <Tab
+            label=" اضافة منتجات وشحنات "
+            value="2"
+            disabled={!isAdmin}
+            sx={{ color: "white" }}
+          />
+          <Tab
+            label=" الشحنات "
+            value="3"
+            disabled={!isAdmin}
+            sx={{ color: "white" }}
+          />
+          <Tab
+            label=" تقارير البوفيه "
+            value="4"
+            disabled={!isAdmin}
+            sx={{ color: "white" }}
+          />
+          <Tab
+            label=" عمليات الشراء  "
+            value="5"
+            disabled={!isAdmin}
+            sx={{ color: "white" }}
+          />
+          <Tab
+            label=" تعديل المنتجات   "
+            value="6"
+            disabled={!isAdmin}
+            sx={{ color: "white" }}
+          />
         </TabList>
       </Box>
 
@@ -58,6 +84,9 @@ export default function Index({ isAdmin }) {
       </TabPanel>
       <TabPanel value="5">
         <Transactions />
+      </TabPanel>
+      <TabPanel value="6">
+        <UpdateProduct />
       </TabPanel>
     </TabContext>
   );

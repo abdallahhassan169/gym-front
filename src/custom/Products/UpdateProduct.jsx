@@ -34,7 +34,7 @@ const columns = [
     valueFormatter: (params) => params.value || 0,
   },
 ];
-export default function AllProducts() {
+export default function UpdateProduct() {
   const style = {
     position: "absolute",
     top: "50%",
@@ -50,14 +50,14 @@ export default function AllProducts() {
   const gridref = React.useRef();
   const [modal, setModal] = React.useState(false);
   const [query, setQuery] = React.useState("");
-  const [productId, setProductId] = React.useState();
+  const [data, setData] = React.useState();
   const [noti, setNoti] = React.useState(false);
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
   const onRowClick = (row) => {
-    setModal("addPrice");
-    setProductId(row?.row.id);
+    setModal(true);
+    setData(row?.row);
   };
   const onAddClose = (refresh) => {
     if (refresh) {
@@ -102,11 +102,7 @@ export default function AllProducts() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {modal === "AddProduct" ? (
-            <NewProduct onClose={onAddClose} />
-          ) : (
-            <NewProductPrice productId={productId} onClose={onAddClose} />
-          )}
+          <NewProduct onClose={onAddClose} data={data} />
         </Box>
       </Modal>
       <Snackbar
