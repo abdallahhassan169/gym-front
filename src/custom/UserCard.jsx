@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import ReactWhatsapp from "react-whatsapp";
 export default function UserCard({ user_id }) {
+  console.log(user_id?.id);
   const style = {
     position: "absolute",
     top: "50%",
@@ -103,7 +104,7 @@ export default function UserCard({ user_id }) {
       )}
 
       <Stack sx={{ width: "100%" }} spacing={2}>
-        {user_id?.exist === false && (
+        {(user_id?.id & user_id?.exist) === false && (
           <Alert severity="error">
             <AlertTitle>تنبيه</AlertTitle>
             لقد تم انتهاء الاشتراك
