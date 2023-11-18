@@ -2,7 +2,7 @@ import "./App.css";
 import Main from "./custom/Main";
 import { BrowserRouter as Router } from "react-router-dom";
 import Test from "./Components/QrReader";
-import gym from "./gym2.jpeg";
+import gym from "./images/gym2.jpeg";
 import React from "react";
 import { useState } from "react";
 function App() {
