@@ -1,6 +1,6 @@
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
+import { Alert } from "../../../Components/CustomAlert";
 import { Button, FormHelperText } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import { useState } from "react";
@@ -13,9 +13,6 @@ export default function Consumption({ onClose, productPrice }) {
   const [qty, setQty] = useState(0);
 
   const [noti, setNoti] = useState(false);
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
   console.log(productPrice, "productPrice");
   const handle = (e) => {
     e.preventDefault();

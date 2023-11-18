@@ -1,5 +1,5 @@
 import React from "react";
-import Grid from "./Grid";
+import Grid from "../Components/Grid";
 import dayjs from "dayjs";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },

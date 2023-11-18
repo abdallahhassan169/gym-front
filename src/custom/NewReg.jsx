@@ -1,6 +1,6 @@
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
+import { Alert } from "../Components/CustomAlert";
 import FormControl from "@mui/material/FormControl";
 import { Button, FormHelperText } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
@@ -19,9 +19,6 @@ export default function NewReg({ user_id, onClose }) {
   const [cost, setCost] = useState(0);
   const [noti, setNoti] = useState("");
 
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
   const handle = (props) => {
     const payload = {
       id: user_id,

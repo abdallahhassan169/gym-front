@@ -1,6 +1,6 @@
 import * as React from "react";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
+import { Alert } from "../Components/CustomAlert";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
@@ -54,9 +54,7 @@ export default function Main() {
   const [userModal, setUserModal] = React.useState(false);
   const [noti, setNoti] = React.useState(false);
   const gridref = React.useRef();
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+
   const onUserFormClose = (refresh) => {
     if (refresh) {
       setUserModal(false);

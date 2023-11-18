@@ -5,10 +5,10 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import AllProducts from "./AllProducts";
 import ProductsPrices from "./ProductPrices";
-import ProductsForConsumption from "./ProductsForConsumption";
+import ProductsForConsumption from "./Consumption/ProductsForConsumption";
 import { Box } from "@mui/material";
 import ProductReports from "./ProductReports";
-import Transactions from "./Transactions";
+import Transactions from "./Transactions/Transactions";
 import UpdateProduct from "./UpdateProduct";
 export default function Index({ isAdmin }) {
   const [value, setValue] = React.useState("1");

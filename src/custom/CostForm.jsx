@@ -1,22 +1,20 @@
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 import FormControl from "@mui/material/FormControl";
 import { Button, FormHelperText } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import { useState } from "react";
 import axios from "axios";
 import OutlinedInput from "@mui/material/OutlinedInput";
-
+import { Alert } from "../Components/CustomAlert";
+import { backEnd } from "../default";
 export default function CostForm({ onClose, type }) {
   const [description, setDescription] = useState("");
   const [cost, setCost] = useState(0);
   const [file, setFile] = useState();
   const [noti, setNoti] = useState("");
   console.log(noti);
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+
   const handle = async () => {
     const payload = {
       cost: cost,
@@ -28,7 +26,7 @@ export default function CostForm({ onClose, type }) {
     formData.append("data", JSON.stringify(payload));
 
     await axios
-      .post("http://localhost:3012/add_cost", formData, {
+      .post(backEnd + "/add_cost", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

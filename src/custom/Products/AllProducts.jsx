@@ -1,11 +1,10 @@
 import React from "react";
-import Grid from "../Grid";
+import Grid from "../../Components/Grid";
+import { Alert } from "../../Components/CustomAlert";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Button } from "@mui/material";
-import dayjs from "dayjs";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 import NewProduct from "./NewProduct";
 import NewProductPrice from "./NewProductPrice";
 const columns = [
@@ -52,9 +51,7 @@ export default function AllProducts() {
   const [query, setQuery] = React.useState("");
   const [productId, setProductId] = React.useState();
   const [noti, setNoti] = React.useState(false);
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+
   const onRowClick = (row) => {
     setModal("addPrice");
     setProductId(row?.row.id);

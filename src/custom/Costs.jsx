@@ -1,5 +1,6 @@
 import React from "react";
-import Grid from "./Grid";
+import Grid from "../Components/Grid";
+import { Alert } from "../Components/CustomAlert";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Button } from "@mui/material";
@@ -7,7 +8,7 @@ import CostForm from "./CostForm";
 import CostCard from "./CostCard";
 import dayjs from "dayjs";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
+
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -46,9 +47,7 @@ export default function Costs({ type }) {
   const [query, setQuery] = React.useState("");
   const [billId, setBillId] = React.useState();
   const [noti, setNoti] = React.useState(false);
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+
   const onRowClick = (row) => {
     setModal("info");
     setBillId(row?.row.id);

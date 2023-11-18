@@ -1,6 +1,6 @@
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
+import { Alert } from "../Components/CustomAlert";
 import { Button, FormHelperText } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -25,9 +25,7 @@ export default function NewUser({ onClose }) {
   const [types, setTypes] = useState([]);
   const [sports, setSports] = useState([]);
   const [noti, setNoti] = useState(false);
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+
   console.log(noti);
   React.useEffect(() => {
     axios
