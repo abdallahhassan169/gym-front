@@ -7,6 +7,8 @@ import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import dayjs from "dayjs";
 import { Button } from "@mui/material";
+import { backEnd } from "../../../default";
+
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
 
@@ -50,7 +52,7 @@ export default function TransactionReports() {
     { type: "year", title: "سنوي" },
   ];
 
-  const url = `http://127.0.0.1:3012/reports?type=${type}&from=${from}&to=${to}
+  const url = `${backEnd}/reports?type=${type}&from=${from}&to=${to}
   `;
   const handle = () => {
     if (password === pass) setShow(true);

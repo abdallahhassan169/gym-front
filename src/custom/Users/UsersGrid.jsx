@@ -3,6 +3,7 @@ import React from "react";
 import UserCard from "./UserCard";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { backEnd } from "../../default";
 const columns = [
   { field: "id", headerName: "ID", width: 90, hideable: false },
   {
@@ -70,7 +71,7 @@ const UsersGrid = React.forwardRef(({ query, sport }, ref) => {
     setModalShow(true);
     setUser(props.row.id);
   };
-  const url = `http://127.0.0.1:3012/users?query=${query}&sport=${
+  const url = `${backEnd}/users?query=${query}&sport=${
     parseInt(sport) ? parseInt(sport) : 1
   }`;
 

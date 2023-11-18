@@ -13,6 +13,7 @@ import Select from "@mui/material/Select";
 import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import { backEnd } from "../../default";
 
 export default function NewUser({ onClose }) {
   const [file, setFile] = useState();
@@ -29,11 +30,11 @@ export default function NewUser({ onClose }) {
   console.log(noti);
   React.useEffect(() => {
     axios
-      .get("http://127.0.0.1:3012/sports")
+      .get(backEnd + "/sports")
       .then((res) => setSports(res.data))
       .catch((err) => setNoti("خطا  "));
     axios
-      .get("http://127.0.0.1:3012/types")
+      .get(backEnd + "/types")
       .then((res) => setTypes(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -52,7 +53,7 @@ export default function NewUser({ onClose }) {
     formData.append("image", file);
     formData.append("data", JSON.stringify(payload));
     axios
-      .post("http://127.0.0.1:3012/add_user", formData, {
+      .post(backEnd + "/add_user", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

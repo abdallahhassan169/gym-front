@@ -5,6 +5,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import dayjs from "dayjs";
+import { backEnd } from "../../default";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -51,7 +52,7 @@ export default function Reports() {
     { type: "year", title: "سنوي" },
   ];
 
-  const url = `http://127.0.0.1:3012/reports?type=${type}&from=${from}&to=${to}
+  const url = `${backEnd}/reports?type=${type}&from=${from}&to=${to}
   `;
 
   return (

@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import NewProduct from "./NewProduct";
 import NewProductShipment from "../Shipments/NewProductShipment";
+import { backEnd } from "../../../default";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -63,7 +64,7 @@ export default function AllProducts() {
       setNoti("تمت الاضافة بنجاح");
     } else setModal(false);
   };
-  const url = `http://127.0.0.1:3012/products?query=${query}
+  const url = `${backEnd}/products?query=${query}
   `;
   return (
     <>

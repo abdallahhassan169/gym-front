@@ -4,7 +4,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import OutlinedInput from "@mui/material/OutlinedInput";
+import { backEnd } from "../../../default";
 import dayjs from "dayjs";
 
 const columns = [
@@ -46,7 +46,7 @@ export default function ProductReports() {
     { type: "year", title: "سنوي" },
   ];
 
-  const url = `http://127.0.0.1:3012/product_reports?type=${type}&from=${from}&to=${to}
+  const url = `${backEnd}/product_reports?type=${type}&from=${from}&to=${to}
   `;
 
   return (

@@ -4,7 +4,7 @@ import { Alert } from "../../../Components/CustomAlert";
 import { Button, FormHelperText } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import { useState } from "react";
-
+import { backEnd } from "../../../default";
 import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -22,7 +22,7 @@ export default function Consumption({ onClose, productPrice }) {
       unit_price: productPrice?.price,
     };
     axios
-      .post("http://127.0.0.1:3012/add_product_transaction", payload)
+      .post(backEnd + "/add_product_transaction", payload)
       .then((res) => {
         console.log(res);
         onClose(true);

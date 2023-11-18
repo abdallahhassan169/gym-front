@@ -8,6 +8,7 @@ import CostForm from "./CostForm";
 import CostCard from "./CostCard";
 import dayjs from "dayjs";
 import Snackbar from "@mui/material/Snackbar";
+import { backEnd } from "../../default";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -59,9 +60,7 @@ export default function Costs({ type }) {
       setNoti("تمت الاضافة بنجاح");
     } else setModal(false);
   };
-  const url = `http://127.0.0.1:3012/subs_costs?type=${parseInt(
-    type
-  )}&query=${query}
+  const url = `${backEnd}/subs_costs?type=${parseInt(type)}&query=${query}
   `;
   return (
     <>

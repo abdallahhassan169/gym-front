@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
+import { backEnd } from "../../default";
 export default function CostCard({ bill }) {
   const [dataCard, setDataCard] = React.useState([]);
   console.log(dataCard);
   React.useEffect(() => {
     axios
-      .get("http://127.0.0.1:3012/cost_data?id=" + parseInt(bill))
+      .get(backEnd + "/cost_data?id=" + parseInt(bill))
       .then((res) => setDataCard(res.data[0]));
   }, [bill]);
   return (

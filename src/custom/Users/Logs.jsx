@@ -1,6 +1,8 @@
 import React from "react";
 import Grid from "../../Components/Grid";
 import dayjs from "dayjs";
+import { backEnd } from "../../default";
+
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -28,7 +30,7 @@ export default function Logs() {
   console.log(d);
   const [from, setFrom] = React.useState("01-01-01 00:00:00");
   const [to, setTo] = React.useState("01-01-2100 00:00:00");
-  const url = `http://127.0.0.1:3012/users_log?query=${query}&from=${from}&to=${to}
+  const url = `${backEnd}/users_log?query=${query}&from=${from}&to=${to}
   `;
   return (
     <>

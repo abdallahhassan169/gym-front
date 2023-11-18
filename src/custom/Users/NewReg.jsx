@@ -11,6 +11,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { useState } from "react";
 import axios from "axios";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import { backEnd } from "../../default";
 
 export default function NewReg({ user_id, onClose }) {
   const [from, setFrom] = useState("");
@@ -28,7 +29,7 @@ export default function NewReg({ user_id, onClose }) {
       classes_num: num,
     };
     axios
-      .post("http://127.0.0.1:3012/add_reg", payload)
+      .post(backEnd + "/add_reg", payload)
       .then((res) => {
         res.status === 200 ? setNoti("success") : setNoti("error");
       })

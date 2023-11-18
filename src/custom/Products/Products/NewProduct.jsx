@@ -8,6 +8,7 @@ import { useState } from "react";
 import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import { backEnd } from "../../../default";
 
 export default function NewProduct({ onClose, data }) {
   const [name, setName] = useState();
@@ -28,7 +29,7 @@ export default function NewProduct({ onClose, data }) {
     };
     console.log(payload);
     axios
-      .post("http://127.0.0.1:3012/add_product", payload)
+      .post(backEnd + "/add_product", payload)
       .then((res) => {
         console.log(res);
         onClose(true);

@@ -25,6 +25,7 @@ import Reports from "./Reports/Reports";
 import Index from "./Products/Index";
 import Logs from "./Users/Logs";
 import AdminForm from "./Admin/AdminForm";
+import { backEnd } from "../default";
 export default function Main() {
   const style = {
     position: "absolute",
@@ -67,7 +68,7 @@ export default function Main() {
   };
   const getData = () => {
     axios
-      .get("http://127.0.0.1:3012/sports")
+      .get(backEnd + "/sports")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   };

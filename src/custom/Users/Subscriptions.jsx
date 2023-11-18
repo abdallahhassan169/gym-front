@@ -1,5 +1,6 @@
 import React from "react";
 import Grid from "../../Components/Grid";
+import { backEnd } from "../../default";
 
 import dayjs from "dayjs";
 const columns = [
@@ -38,9 +39,7 @@ export default function Subs() {
   const gridref = React.useRef();
   const [query, setQuery] = React.useState("");
 
-  const url = `http://127.0.0.1:3012/subs_costs?type=${parseInt(
-    2
-  )}&query=${query}`;
+  const url = `${backEnd}/subs_costs?type=${parseInt(2)}&query=${query}`;
   return (
     <>
       <div style={{ width: "93%" }}>

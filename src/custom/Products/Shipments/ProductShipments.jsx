@@ -6,6 +6,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Grid from "../../../Components/Grid";
 import { Alert } from "../../../Components/CustomAlert";
 import NewProductPrice from "./NewProductShipment";
+import { backEnd } from "../../../default";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -59,7 +60,7 @@ export default function ProductsPrices() {
       setNoti("تمت الاضافة بنجاح");
     } else setModal(false);
   };
-  const url = `http://127.0.0.1:3012/product_prices?query=${query}`;
+  const url = `${backEnd}/product_prices?query=${query}`;
   return (
     <>
       <div style={{ width: "93%" }}>

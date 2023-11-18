@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
+import { backEnd } from "../../default";
 
 export default function UserCard({ user_id }) {
   console.log(user_id?.id);
@@ -33,8 +34,7 @@ export default function UserCard({ user_id }) {
     fetch();
     setNoti("تم الاشتراك بنجاح");
   };
-  const url =
-    "http://127.0.0.1:3012/user_by_id?user_id=" + parseInt(user_id?.id);
+  const url = backEnd + "/user_by_id?user_id=" + parseInt(user_id?.id);
   const fetch = () => {
     axios
       .get(url)

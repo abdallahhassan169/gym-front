@@ -1,6 +1,7 @@
 import React from "react";
 import Grid from "../../../Components/Grid";
 import dayjs from "dayjs";
+import { backEnd } from "../../../default";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -34,7 +35,7 @@ export default function Transactions() {
   const [to, setTo] = React.useState("01-01-2100 00:00:00");
   const [show, setShow] = React.useState(false);
 
-  const url = `http://127.0.0.1:3012/product_transactions?from=${from}&to=${to}
+  const url = `${backEnd}/product_transactions?from=${from}&to=${to}
   `;
 
   return (
