@@ -1,39 +1,39 @@
 import React from "react";
+import Grid from "../../../Components/Grid";
+import { Alert } from "../../../Components/CustomAlert";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import dayjs from "dayjs";
+import { Button } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
-import Grid from "../../Components/Grid";
-import { Alert } from "../../Components/CustomAlert";
-import NewProductPrice from "./NewProductPrice";
+import NewProduct from "./NewProduct";
+import NewProductShipment from "../Shipments/NewProductShipment";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
     field: "name",
-    headerName: "اسم المنتج",
-    width: 150,
-  },
-
-  {
-    field: "total_price",
-    headerName: "سعر الشحنة ",
-    width: 200,
-  },
-
-  {
-    field: "qty",
-    headerName: "كمية الشحنة ",
+    headerName: "الاسم",
     width: 150,
   },
   {
-    field: "date",
-    headerName: "التاريخ",
+    field: "serial",
+    headerName: "السريال",
+    width: 150,
+    valueFormatter: (params) => params.value || "NAN",
+  },
+  {
+    field: "availble",
+    headerName: "المتاح",
     width: 200,
-    valueFormatter: (params) =>
-      dayjs(params.value).format("DD/MM/YYYY hh:mm A"),
+    valueFormatter: (params) => params.value || 0,
+  },
+  {
+    field: "price",
+    headerName: "السعر",
+    width: 200,
+    valueFormatter: (params) => params.value || 0,
   },
 ];
-export default function ProductsPrices() {
+export default function AllProducts() {
   const style = {
     position: "absolute",
     top: "50%",
@@ -49,9 +49,13 @@ export default function ProductsPrices() {
   const gridref = React.useRef();
   const [modal, setModal] = React.useState(false);
   const [query, setQuery] = React.useState("");
-  const [current, setCurrent] = React.useState();
+  const [productId, setProductId] = React.useState();
   const [noti, setNoti] = React.useState(false);
 
+  const onRowClick = (row) => {
+    setModal("addPrice");
+    setProductId(row?.row.id);
+  };
   const onAddClose = (refresh) => {
     if (refresh) {
       setModal(false);
@@ -59,9 +63,18 @@ export default function ProductsPrices() {
       setNoti("تمت الاضافة بنجاح");
     } else setModal(false);
   };
-  const url = `http://127.0.0.1:3012/product_prices?query=${query}`;
+  const url = `http://127.0.0.1:3012/products?query=${query}
+  `;
   return (
     <>
+      <Button
+        variant="contained"
+        style={{ width: "100%", height: "40px", marginBottom: "10px" }}
+        color="success"
+        onClick={() => setModal("AddProduct")}
+      >
+        اضافة منتج جديد
+      </Button>
       <div style={{ width: "93%" }}>
         <input
           sport="search"
@@ -72,7 +85,13 @@ export default function ProductsPrices() {
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
-      <Grid columns={columns} url={url} ref={gridref} fetchParams={[query]} />
+      <Grid
+        columns={columns}
+        url={url}
+        ref={gridref}
+        rowClick={onRowClick}
+        fetchParams={[query]}
+      />
       <Modal
         open={modal}
         onClose={() => onAddClose(false)}
@@ -80,7 +99,11 @@ export default function ProductsPrices() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <NewProductPrice init={current} onClose={onAddClose} />
+          {modal === "AddProduct" ? (
+            <NewProduct onClose={onAddClose} />
+          ) : (
+            <NewProductShipment productId={productId} onClose={onAddClose} />
+          )}
         </Box>
       </Modal>
       <Snackbar

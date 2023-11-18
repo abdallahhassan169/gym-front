@@ -1,6 +1,6 @@
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
-import { Alert } from "../Components/CustomAlert";
+import { Alert } from "../../Components/CustomAlert";
 import FormControl from "@mui/material/FormControl";
 import { Button, FormHelperText } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";

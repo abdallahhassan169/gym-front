@@ -17,14 +17,14 @@ import {
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import NewUser from "./NewUser";
-import UsersGrid from "./UsersGrid";
-import Costs from "./Costs";
-import Subs from "./Subs";
-import Reports from "./Reports";
+import NewUser from "./Users/NewUser";
+import UsersGrid from "./Users/UsersGrid";
+import Costs from "./Costs/Costs";
+import Subs from "./Users/Subscriptions";
+import Reports from "./Reports/Reports";
 import Index from "./Products/Index";
-import Logs from "./Logs";
-import AdminForm from "./AdminForm";
+import Logs from "./Users/Logs";
+import AdminForm from "./Admin/AdminForm";
 export default function Main() {
   const style = {
     position: "absolute",

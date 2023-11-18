@@ -1,31 +1,34 @@
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
-import { Alert } from "../../Components/CustomAlert";
+import { Alert } from "../../../Components/CustomAlert";
 import { Button, FormHelperText } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import { useState } from "react";
+
 import axios from "axios";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 
-export default function NewProductPrice({ onClose, productId, init }) {
-  const [qty, setQty] = useState(init?.qty);
-  const [price, setPrice] = useState(init?.unit_price);
-  const [total, setTotal] = useState(init?.unit_price);
+export default function NewProduct({ onClose, data }) {
+  const [name, setName] = useState();
+  const [serial, setSerial] = useState();
+  const [qty, setQty] = useState();
+  const [price, setPrice] = useState();
 
   const [noti, setNoti] = useState(false);
 
   const handle = (e) => {
     e.preventDefault();
     const payload = {
-      qty: qty,
-      unit_price: price,
-      total_price: total,
-      product_id: productId,
-      id: init?.id,
+      name: name ?? data.name,
+      serial: serial ?? data.serial,
+      qty: qty ?? data?.availble,
+      price: price ?? data.price,
+      id: data?.id,
     };
+    console.log(payload);
     axios
-      .post("http://127.0.0.1:3012/add_shipment", payload)
+      .post("http://127.0.0.1:3012/add_product", payload)
       .then((res) => {
         console.log(res);
         onClose(true);
@@ -36,28 +39,50 @@ export default function NewProductPrice({ onClose, productId, init }) {
   return (
     <FormControl sx={{ width: "100%" }}>
       <FormControl sx={{ marginTop: "20px" }}>
+        <InputLabel htmlFor="my-input">الاسم </InputLabel>
+        <OutlinedInput
+          type="text"
+          required
+          id="my-input"
+          aria-describedby="my-helper-text"
+          variant="standard"
+          defaultValue={data?.name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </FormControl>
+      <FormControl sx={{ marginTop: "20px" }}>
+        <InputLabel htmlFor="my-input">السريال </InputLabel>
+        <OutlinedInput
+          type="text"
+          id="my-input"
+          aria-describedby="my-helper-text"
+          variant="standard"
+          defaultValue={data?.serial}
+          onChange={(e) => setSerial(e.target.value)}
+        />
+      </FormControl>
+      <FormControl sx={{ marginTop: "20px" }}>
         <InputLabel htmlFor="my-input">الكمية </InputLabel>
         <OutlinedInput
           type="number"
           required
+          defaultValue={data?.availble}
           id="my-input"
           aria-describedby="my-helper-text"
           variant="standard"
-          defaultValue={init?.qty}
           onChange={(e) => setQty(e.target.value)}
         />
       </FormControl>
-
       <FormControl sx={{ marginTop: "20px" }}>
-        <InputLabel htmlFor="my-input">سعر الشراء الكلي </InputLabel>
+        <InputLabel htmlFor="my-input">السعر </InputLabel>
         <OutlinedInput
           type="number"
           required
           id="my-input"
           aria-describedby="my-helper-text"
           variant="standard"
-          defaultValue={init?.total_price}
-          onChange={(e) => setTotal(e.target.value)}
+          defaultValue={data?.price}
+          onChange={(e) => setPrice(e.target.value)}
         />
       </FormControl>
       <FormControl sx={{ marginTop: "20px" }}>

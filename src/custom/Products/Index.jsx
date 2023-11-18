@@ -3,13 +3,13 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import AllProducts from "./AllProducts";
-import ProductsPrices from "./ProductPrices";
+import AllProducts from "./Products/AllProducts";
+import ProductsPrices from "./Shipments/ProductShipments";
 import ProductsForConsumption from "./Consumption/ProductsForConsumption";
 import { Box } from "@mui/material";
-import ProductReports from "./ProductReports";
+import ProductReports from "./ProductReports/ProductReports";
 import Transactions from "./Transactions/Transactions";
-import UpdateProduct from "./UpdateProduct";
+import UpdateProduct from "./Products/UpdateProduct";
 export default function Index({ isAdmin }) {
   const [value, setValue] = React.useState("1");
 

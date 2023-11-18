@@ -1,30 +1,30 @@
 import React from "react";
-import Grid from "../Components/Grid";
+import Grid from "../../../Components/Grid";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import OutlinedInput from "@mui/material/OutlinedInput";
 import dayjs from "dayjs";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
 
   {
-    field: "cost_sum",
-    headerName: "المصروفات",
-    width: 100,
-  },
-  {
-    field: "dev_cost",
-    headerName: "الاجهزة",
-    width: 100,
-  },
-  {
-    field: "sub_sum",
+    field: "profit",
     headerName: "الارباح",
     width: 150,
   },
-
+  {
+    field: "cost",
+    headerName: "التكاليف",
+    width: 150,
+  },
+  {
+    field: "total",
+    headerName: "المجموع",
+    width: 150,
+  },
   {
     field: "date",
     headerName: "التاريخ",
@@ -32,17 +32,12 @@ const columns = [
     valueFormatter: (params) =>
       dayjs(params.value).format("DD/MM/YYYY hh:mm A"),
   },
-  {
-    field: "total",
-    headerName: "صافي الربح",
-    width: 150,
-  },
 ];
-export default function Reports() {
-  const gridref = React.useRef();
+export default function ProductReports() {
   const [type, setType] = React.useState("day");
   const [from, setFrom] = React.useState("01-01-01 00:00:00");
   const [to, setTo] = React.useState("01-01-2100 00:00:00");
+  const gridref = React.useRef();
 
   const types = [
     { type: "day", title: "يومي" },
@@ -51,7 +46,7 @@ export default function Reports() {
     { type: "year", title: "سنوي" },
   ];
 
-  const url = `http://127.0.0.1:3012/reports?type=${type}&from=${from}&to=${to}
+  const url = `http://127.0.0.1:3012/product_reports?type=${type}&from=${from}&to=${to}
   `;
 
   return (

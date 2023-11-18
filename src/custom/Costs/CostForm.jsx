@@ -6,8 +6,8 @@ import InputLabel from "@mui/material/InputLabel";
 import { useState } from "react";
 import axios from "axios";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import { Alert } from "../Components/CustomAlert";
-import { backEnd } from "../default";
+import { Alert } from "../../Components/CustomAlert";
+import { backEnd } from "../../default";
 export default function CostForm({ onClose, type }) {
   const [description, setDescription] = useState("");
   const [cost, setCost] = useState(0);

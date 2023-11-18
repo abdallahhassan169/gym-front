@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import QrReader from "react-qr-scanner";
-import UserCard from "./UserCard";
+import UserCard from "../custom/Users/UserCard";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
