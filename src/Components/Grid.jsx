@@ -32,13 +32,22 @@ const Grid = React.forwardRef(
             height: 550,
             width: "100%",
             marginTop: "15px",
-            bgcolor: "grey",
+            bgcolor: "#c1c7bf",
             color: "white",
             border: 2,
             borderColor: "primary.light",
             marginBottom: "90px",
+            "& .MuiDataGrid-row": {
+              color: "black",
+              fontWeight: "bold",
+            },
+            "& .MuiDataGrid-columnHeader": {
+              backgroundColor: "#5cdb2a",
+              color: "black",
+              fontWeight: "bold",
+            },
             "& .MuiDataGrid-row:hover": {
-              backgroundColor: "#556B2F",
+              bgcolor: "green",
             },
           }}
         >

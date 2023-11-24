@@ -5,7 +5,13 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { backEnd } from "../../default";
 const columns = [
-  { field: "id", headerName: "ID", width: 90, hideable: false },
+  {
+    field: "id",
+    headerName: "ID",
+    width: 90,
+    hideable: false,
+    headerClassName: "super-app-theme--header",
+  },
   {
     field: "name",
     headerName: "الاسم",

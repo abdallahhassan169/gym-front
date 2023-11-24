@@ -70,6 +70,7 @@ export default function ProductReports() {
               label="نوع التقرير"
               onChange={(e) => setType(e.target.value)}
               sx={{
+                bgcolor: "#faf5f5",
                 direction: "ltr",
                 width: "200px",
                 marginLeft: "10px",

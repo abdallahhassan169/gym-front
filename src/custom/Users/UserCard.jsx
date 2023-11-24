@@ -8,7 +8,8 @@ import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import { backEnd } from "../../default";
-
+import Barcode from "react-barcode";
+import html2canvas from "html2canvas";
 export default function UserCard({ user_id }) {
   console.log(user_id?.id);
   const style = {
@@ -26,9 +27,20 @@ export default function UserCard({ user_id }) {
   const [data, setData] = React.useState([]);
   const [modalShow, setModalShow] = React.useState(false);
   const [noti, setNoti] = React.useState("");
-  const my = React.useRef();
+  const barcodeRef = React.useRef();
   console.log(user_id, "user_id");
+  const downloadBarcode = async () => {
+    if (barcodeRef.current) {
+      const canvas = await html2canvas(barcodeRef.current);
+      const imageUrl = canvas.toDataURL("image/png");
 
+      // Create a temporary anchor element to trigger the download
+      const a = document.createElement("a");
+      a.href = imageUrl;
+      a.download = data[0]?.name + "-barcode.png";
+      a.click();
+    }
+  };
   const onClose = () => {
     setModalShow(false);
     fetch();
@@ -45,10 +57,11 @@ export default function UserCard({ user_id }) {
   React.useEffect(() => {
     fetch();
   }, [user_id?.id]);
+  console.log(data[0]);
   return (
     <>
       {user_id?.id && (
-        <div style={{ display: "inline-flex", marginTop: "30px" }}>
+        <div style={{ display: "flex", marginTop: "30px" }}>
           <div
             class="card"
             style={{
@@ -65,16 +78,11 @@ export default function UserCard({ user_id }) {
               alt="  لا يوجد صورة شخصية"
             ></img>
           </div>
-          <div
-            class="card"
-            style={{ width: "80%", width: "150px", height: "150px" }}
-          >
-            <img
-              class="card-img-top"
-              src={"http://127.0.0.1:3012/img?id=" + parseInt(user_id?.id)}
-              alt="Card image cap"
-            ></img>
+
+          <div ref={barcodeRef} onDoubleClick={downloadBarcode}>
+            <Barcode value={data[0]?.qr_code_name} />
           </div>
+
           <div
             class="card"
             style={{
@@ -95,19 +103,17 @@ export default function UserCard({ user_id }) {
               <li class="list-group-item">
                 {data[0]?.reg_end_date?.slice(0, 10) ?? "غير مشترك"}
               </li>
-              <li class="list-group-item">{" حصص " + data[0]?.classes_num}</li>
-
-              <li class="list-group-item"></li>
+              <li class="list-group-item"> {" حصص " + data[0]?.classes_num}</li>
             </ul>
           </div>
         </div>
       )}
 
       <Stack sx={{ width: "100%" }} spacing={2}>
-        {(user_id?.id & user_id?.exist) === false && (
+        {user_id?.id && user_id?.exist === false && (
           <Alert severity="error">
-            <AlertTitle>تنبيه</AlertTitle>
-            لقد تم انتهاء الاشتراك
+            <AlertTitle>عملية غير ناجحة</AlertTitle>
+            هذاالمستخدم غير مشترك او قد تم انتهاء اشتراكه
           </Alert>
         )}
         {!user_id?.id && (

@@ -13,17 +13,13 @@ const columns = [
   {
     field: "cost_sum",
     headerName: "المصروفات",
-    width: 100,
+    width: 200,
   },
-  {
-    field: "dev_cost",
-    headerName: "الاجهزة",
-    width: 100,
-  },
+
   {
     field: "sub_sum",
     headerName: "الارباح",
-    width: 150,
+    width: 200,
   },
 
   {
@@ -36,7 +32,7 @@ const columns = [
   {
     field: "total",
     headerName: "صافي الربح",
-    width: 150,
+    width: 200,
   },
 ];
 export default function Reports() {
@@ -76,6 +72,7 @@ export default function Reports() {
               label="نوع التقرير"
               onChange={(e) => setType(e.target.value)}
               sx={{
+                bgcolor: "#faf5f5",
                 direction: "ltr",
                 width: "200px",
                 marginLeft: "10px",

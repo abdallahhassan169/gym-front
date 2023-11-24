@@ -4,6 +4,8 @@ import UserCard from "../custom/Users/UserCard";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
+import BarcodeReader from "react-barcode-reader";
+import BarcodeScanner from "./BarCodeScan";
 const Test = () => {
   const [delay, setDelay] = useState(100);
   const [user, setUser] = useState();
@@ -12,25 +14,24 @@ const Test = () => {
 
   const handleScan = (data) => {
     setResult(data);
+    console.log(data, "data from my scann");
     if (data) {
       setHandler(true);
-      axios
-        .post("http://127.0.0.1:3012/scan", { code: data.text })
-        .then((res) => {
-          setUser(res.data ?? { id: null });
-          console.log(res.data, "datattatata");
-        });
+      axios.post("http://127.0.0.1:3012/scan", { code: data }).then((res) => {
+        setUser(res.data ?? { id: null });
+        console.log(res.data, "datattatata");
+      });
     }
   };
 
-  const handleError = (err) => {
-    console.error(err);
-  };
+  // const handleError = (err) => {
+  //   console.error(err);
+  // };
 
-  const previewStyle = {
-    height: 240,
-    width: 320,
-  };
+  // const previewStyle = {
+  //   height: 240,
+  //   width: 320,
+  // };
   const style = {
     position: "absolute",
     top: "50%",
@@ -46,14 +47,7 @@ const Test = () => {
   return (
     <div>
       {/* set qr reader opposite of modal state */}
-      {!handler && (
-        <QrReader
-          delay={delay}
-          style={previewStyle}
-          onError={handleError}
-          onScan={handleScan}
-        />
-      )}
+      {!handler && <BarcodeScanner onScan={handleScan} />}
       <p>{result?.text}</p>
       <Modal
         open={handler}

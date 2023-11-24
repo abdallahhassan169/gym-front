@@ -53,7 +53,7 @@ export default function NewUser({ onClose }) {
     formData.append("image", file);
     formData.append("data", JSON.stringify(payload));
     axios
-      .post(backEnd + "/add_user", formData, {
+      .post(`${backEnd}/add_user`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -2,9 +2,13 @@ import "./App.css";
 import Main from "./custom/Main";
 import { BrowserRouter as Router } from "react-router-dom";
 import Test from "./Components/QrReader";
-import gym from "./images/gym2.jpeg";
+import gym from "./images/iron.jpeg";
 import React from "react";
 import { useState } from "react";
+import BarcodeScannerComponent from "./Components/BarCodeScan";
+import ImageDownloadComponent from "./Components/DownLoad";
+import Scanner from "./Components/BarCodeScan";
+import BarcodeScanner from "./Components/BarCodeScan";
 function App() {
   const [showLogo, setShowLogo] = useState(false);
 
@@ -32,19 +36,18 @@ function App() {
       document.removeEventListener("mousedown", handleMouseDown);
     };
   }, []);
+
+  //...
+
   return (
     <>
       {showLogo ? (
-        <img src={gym} alt="" style={{ width: "100%", height: "50%" }} />
+        <img src={gym} alt="" style={{ width: "100%", height: "10%" }} />
       ) : (
         <Router>
           <div dir="rtl">
-            <div style={{ marginBottom: "70px" }}>
-              <Main />
-            </div>
-            <div style={{ marginTop: "100px" }}>
-              <Test />
-            </div>
+            <Main />
+            <Test />
           </div>
         </Router>
       )}

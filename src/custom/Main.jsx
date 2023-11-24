@@ -99,11 +99,13 @@ export default function Main() {
               textColor: "red",
               borderRadius: "10px",
               alignItems: "center",
+              fontWeight: "bold",
             }}
           >
             <Box
               sx={{
                 borderBottom: "0px",
+                fontWeight: "bold",
                 direction: "rtl",
                 borderRadius: "10px",
                 textColor: "red",
@@ -112,7 +114,7 @@ export default function Main() {
             >
               <TabList
                 sx={{
-                  backgroundColor: "#333",
+                  backgroundColor: "#5cdb2a",
                   height: "60px",
                   borderRadius: "15px",
                   paddingBottom: "0px",
@@ -124,37 +126,45 @@ export default function Main() {
                 onChange={handleChange}
                 aria-label="lab API tabs example"
               >
-                <Tab label="الاشتراكات" value="1" sx={{ color: "white" }} />
+                <Tab
+                  label="الاشتراكات"
+                  value="1"
+                  sx={{ color: "black", fontWeight: "bold" }}
+                />
 
                 <Tab
                   label="المصاريف "
                   value="2"
-                  sx={{ color: "white" }}
-                  disabled={!isAdmin}
+                  sx={{ color: "black", fontWeight: "bold" }}
+                  //disabled={!isAdmin}
                 />
                 <Tab
                   label=" دخل الاشتراكات "
                   value="3"
-                  sx={{ color: "white" }}
+                  sx={{ color: "black", fontWeight: "bold" }}
                   disabled={!isAdmin}
                 />
                 <Tab
                   label=" التقارير "
                   value="4"
-                  sx={{ color: "white" }}
+                  sx={{ color: "black", fontWeight: "bold" }}
                   disabled={!isAdmin}
                 />
-                <Tab label=" البوفيه " value="5" sx={{ color: "white" }} />
+                <Tab
+                  label=" البوفيه "
+                  value="5"
+                  sx={{ color: "black", fontWeight: "bold" }}
+                />
                 <Tab
                   label=" الاجهزة "
                   value="6"
-                  sx={{ color: "white" }}
+                  sx={{ color: "black", fontWeight: "bold" }}
                   disabled={!isAdmin}
                 />
                 <Tab
                   label=" الحضور "
                   value="7"
-                  sx={{ color: "white" }}
+                  sx={{ color: "black", fontWeight: "bold" }}
                   disabled={!isAdmin}
                 />
               </TabList>
@@ -221,14 +231,14 @@ export default function Main() {
                   </CDBSidebarMenu>
                 </div>
               ))}
-            <div style={{ backgroundColor: "grey" }}>
+            <div style={{ backgroundColor: "#5cdb2a" }}>
               <CDBSidebarMenu onClick={() => setUserModal(true)}>
                 <CDBSidebarMenuItem icon="user">
                   انشاء مستخدم جديد
                 </CDBSidebarMenuItem>
               </CDBSidebarMenu>
             </div>
-            <div style={{ backgroundColor: "grey", marginTop: "5px" }}>
+            <div style={{ backgroundColor: "#5cdb2a", marginTop: "5px" }}>
               <CDBSidebarMenu onClick={() => setUserModal("admin")}>
                 <CDBSidebarMenuItem icon="key">Admin</CDBSidebarMenuItem>
               </CDBSidebarMenu>

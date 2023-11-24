@@ -40,7 +40,7 @@ export default function Index({ isAdmin }) {
           <Tab
             label=" اضافة منتجات وشحنات "
             value="2"
-            disabled={!isAdmin}
+            //disabled={!isAdmin}
             sx={{ color: "white" }}
           />
           <Tab
